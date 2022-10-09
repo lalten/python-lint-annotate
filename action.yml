@@ -89,17 +89,17 @@ runs:
 
     - name: Windows install dependencies
       if: ${{ runner.os == 'Windows' }}
-      run:  |
+      run: |
+        pip install -U -r ${{ github.action_path }}\requirements.txt  # linters
         pip install -r requirements.txt  # project's dependencies
-        pip install -r ${{ github.action_path }}\requirements.txt  # linters
         echo "path_sep=" >> $GITHUB_ENV
       shell: pwsh
 
     - name: Posix install dependencies
       if: ${{ runner.os != 'Windows' }}
-      run:  |
+      run: |
+        pip install -U -r ${{ github.action_path }}/requirements.txt  # linters
         pip install -r requirements.txt  # project's dependencies
-        pip install -r ${{ github.action_path }}/requirements.txt  # linters
       shell: bash
 
     - name: Lint on Windows
